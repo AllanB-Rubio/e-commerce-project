@@ -1,0 +1,111 @@
+Initialize The Project: 
+--------------------------------
+1. Run:  
+    terminal: npm init -y 
+
+2. Install "express", "pg", "morgan", and "nodemon":
+    terminal: npm i express pg morgan
+    terminal: npm i -D nodemon
+
+    terminal: npm install uuid
+    terminal: npm install bcrypt
+
+3. Change the package script to run in dev or production modes in 
+package.json file:
+       "start:dev": "nodemon server/index.js"
+
+
+4. Create your database: 
+    terminal: createdb "name of database" :
+                createdb e_commerce_project_db
+
+5. Create your .gitignore file: 
+    terminal: code .gitignore
+
+        Add the following to your gitignore file --> 
+            node_modules
+            package-lock.json
+            .DS_Store
+        
+        Dont forget to save 
+
+6. Create your server folder and files:
+    terminal: 
+        mkdir server && cd server 
+        code  index.js db.js
+
+    Dont forget to save 
+
+
+7. Set up your server file:
+require in your pg and create your Client from it
+    // import express and pg
+
+    const express = require("express");
+    const app = express();
+    const pg = require("pg");
+
+Make sure you add the Database URL if you have one, OR enter it manually: 
+
+    const client = new pg.Client(
+  process.env.DATABASE_URL || "postgres://localhost/acme_notes_categories_db" <-- This changes dending on your database name 
+);
+
+
+
+8. Create your init function and invoke it. Also, make sure that it is an async function:
+
+const init = async () => {
+}
+
+9. Start setting up your init with Database Tables:
+
+    9.1- Connect to the pg client, using await syntax:
+
+    const init = async () => {
+        await client.connect();
+        console.log("connected to database");
+  }
+    9.2- Create a SQL variable with let
+
+        let SQL = ``
+
+    9.3- DROP the table notes if it exists already
+         DROP the table categories if it exists already
+
+        let SQL = `
+            DROP TABLE IF EXISTS notes;
+            DROP TABLE IF EXISTS categories;
+        `
+
+    9.4- CREATE the table categories with columns of id and name, 
+         where name is not null and id is serial.
+
+
+CREATE the table notes with columns of id that is serial, name with text, txt with text, created_at with a default date of now, updated_at with a default date of now, ranking with a default number and not null, and category_id with a number and not null.
+
+Make sure that notes is above categories on the section you drop tables, as notes depend on categories.
+
+Seed some data into the Database
+
+Create categories to INSERT
+Create notes to INSERT
+
+For the required category_id value, put open and closed parentheses to create an expression in SQL: ()
+
+Inside the (), SELECT an id from categories where the name matches a category that makes sense.
+
+Create your express server and listen
+
+Import express into your file and then instantiate express as a variable:
+const express = require('express');
+const app = express();
+
+Save a variable of your process.env.PORT if given, or to 3000
+const port = process.env.PORT || 3000
+
+Use the JSON parsing express method, and also activate logging with Morgan
+app.use(express.json())
+app.use(require('morgan')('dev'))
+
+In your init function, use the listen method on your express app, using the port variable, and console log the resulting port using an arrow function
