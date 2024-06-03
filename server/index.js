@@ -1,12 +1,17 @@
 // Express Application // API Routes // Init Function
 
 const express = require("express");
-const app = express();
-app.use(express.json());
-const bodyParser = require("body-parser");
 const bcrypt = require("bcrypt");
 const { v4: uuidv4 } = require("uuid");
+const pg = require("pg");
+const morgan = require("morgan");
+
+const app = express();
 const { client, createTables } = require("./db");
+
+app.use(express.json());
+app.use(morgan("dev")); // used for logging HTTP requests.
+app.use(express.json()); // built-in JSON parser middleware
 
 const someUsers = []; // In-memory array to store users for testing purposes
 let userIdCounter = 1; // Simple counter to assign user IDs
