@@ -120,6 +120,10 @@ The database schema consists of the following tables:
 - `PUT /cartItems/:id` - Update a cart item
 - `DELETE /cartItems/:id` - Soft delete a cart item
 
+### Visual Schema link
+
+https://app.eraser.io/workspace/21WsUCtHgiipkv00qWsB?origin=share
+
 ## Project made by
 
 - Allan Rubio
