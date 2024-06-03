@@ -177,4 +177,5 @@ const createTables = async () => {
 // updateReview: Update review details.
 // deleteReview: Soft delete a review (admin only).
 
+// Define and export the functions
 module.exports = { createTables, client };
